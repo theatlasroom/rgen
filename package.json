@@ -1,0 +1,7 @@
+{
+  "name": "rcli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ezekiel Kigbo <theatlasroom@gmail.com>",
+  "license": "MIT"
+}
