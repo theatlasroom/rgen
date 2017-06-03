@@ -1,7 +1,7 @@
 const imports = (name) =>
 `
 import React from 'react'
-// import PropTypes from 'react-proptypes'
+import PropTypes from 'prop-types'
 `
 
 const importStyles = (name) =>
