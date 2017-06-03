@@ -1,10 +1,11 @@
 {
   "name": "rcli",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "index.js",
   "author": "Ezekiel Kigbo <theatlasroom@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "standard": "^10.0.2",
     "tape": "^4.6.3"
   }
 }
