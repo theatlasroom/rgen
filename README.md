@@ -2,7 +2,8 @@
 React component cli tool
 
 ## TODO
-* [ ] Classes / functional components / forms? / redux containers?
+* [ ] Classes / functional components
+<!-- * [ ] Forms / redux containers? -->
 * [ ] Configure output folder (Each option can have a separate folder, default to class folder)
 * [ ] Styled component
 * [ ] Jest / enzyme
