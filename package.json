@@ -2,9 +2,11 @@
   "name": "rcli",
   "version": "0.1.0",
   "main": "index.js",
+  "description": "React component generator",
   "author": "Ezekiel Kigbo <theatlasroom@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "argparse": "^1.0.9",
     "standard": "^10.0.2",
     "tape": "^4.6.3"
   }

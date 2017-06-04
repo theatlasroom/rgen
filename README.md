@@ -1,5 +1,5 @@
 # RCLI
-React component cli tool
+React component generator
 
 ## TODO
 * [ ] Classes / functional components
