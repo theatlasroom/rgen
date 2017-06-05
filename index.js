@@ -2,9 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const CLI = require('./lib/CLI');
 const pkg = require('./package.json');
-// console.log('CLI', cli);
-
-// cli.build();
+const chalk = require('chalk')
 
 const ArgumentParser = require('argparse').ArgumentParser;
 const parser = new ArgumentParser({
@@ -31,7 +29,7 @@ parser.addArgument(
 parser.addArgument(
   ['-e', '--ext'],
   {
-    help: 'file extension to use',
+    help: 'file extension to use (defaults to jsx)',
     defaultValue: '.jsx'
   }
 )
@@ -41,9 +39,11 @@ const args = parser.parseArgs();
 prepareOptions(args)
 
 function prepareOptions(args){
+  information('Generating your component')
   let { name, ext, dir } = args;
 
-  ext = (ext.charAt(0) === '.') ? ext.slice(1) : ext
+  dir = dir ? dir : __dirname
+  ext = (ext && ext.charAt(0) === '.') ? ext.slice(1) : ext
 
   const opts = {
     name, ext, dir
@@ -53,21 +53,20 @@ function prepareOptions(args){
   // or be able to just invoke run...
   const cli = new CLI(opts);
   cli.build((err, data, targetFile) => {
-    if (err) console.error('ERROR:', err);
+    if (err) error('ERROR:', err);
     serializer(targetFile, data.join('\n'), (err) => {
       if (err) throw Error(err);
     });
   });
 }
 
-function done(file){
-  console.info(`Created file ${file}`);
-  console.info('Finished!');
-}
-
 function serializer(file, data, cb){
   fs.writeFile(file, data, (err) => {
     if (err) throw Error(`There was a problem creating ${file}`)
-    done(file);
+    success(`Created file ${file}`);
   })
 }
+
+function information(msg){ console.error(chalk.yellow(msg)) }
+function error(msg){ console.error(chalk.red(msg)) }
+function success(msg){ console.error(chalk.green(msg)) }
