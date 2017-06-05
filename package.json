@@ -5,6 +5,10 @@
   "description": "React component generator",
   "author": "Ezekiel Kigbo <theatlasroom@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "tape test.js | tap-dot ",
+    "lint": "standard *.js --fix"
+  },
   "dependencies": {
     "argparse": "^1.0.9",
     "chalk": "^1.1.3",
