@@ -42,17 +42,21 @@ function prepareOptions(args){
   information('Generating your component')
   let { name, ext, dir } = args;
 
+  if (!name) throw Error(`a name must be provided`)
   dir = dir ? dir : __dirname
-  ext = (ext && ext.charAt(0) === '.') ? ext.slice(1) : ext
+  ext = (ext && ext.charAt(0) === '.') ? ext.slice(1) : 'jsx'
+
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+  const targetFile = path.join(dir, `${name}.${ext}`)
 
   const opts = {
-    name, ext, dir
+    name,
   }
 
   // TODO: do i want to first construct this obj, then call run?
   // or be able to just invoke run...
   const cli = new CLI(opts);
-  cli.build((err, data, targetFile) => {
+  cli.build((err, data) => {
     if (err) error('ERROR:', err);
     serializer(targetFile, data.join('\n'), (err) => {
       if (err) throw Error(err);
