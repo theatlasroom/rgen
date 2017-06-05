@@ -1,3 +1,5 @@
+const fs = require('fs')
+const path = require('path')
 const CLI = require('./lib/CLI');
 const pkg = require('./package.json');
 // console.log('CLI', cli);
@@ -50,8 +52,22 @@ function prepareOptions(args){
   // TODO: do i want to first construct this obj, then call run?
   // or be able to just invoke run...
   const cli = new CLI(opts);
-  cli.build((err) => {
+  cli.build((err, data, targetFile) => {
     if (err) console.error('ERROR:', err);
-    console.info('Finished!');
+    serializer(targetFile, data.join('\n'), (err) => {
+      if (err) throw Error(err);
+    });
   });
+}
+
+function done(file){
+  console.info(`Created file ${file}`);
+  console.info('Finished!');
+}
+
+function serializer(file, data, cb){
+  fs.writeFile(file, data, (err) => {
+    if (err) throw Error(`There was a problem creating ${file}`)
+    done(file);
+  })
 }
