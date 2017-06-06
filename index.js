@@ -19,6 +19,13 @@ parser.addArgument(
 )
 
 parser.addArgument(
+  ['-t', '--type'],
+  {
+    help: 'the type of component to create (functional|class)'
+  }
+)
+
+parser.addArgument(
   ['-d', '--dir'],
   {
     help: 'the target directory to output the file into',
@@ -35,6 +42,11 @@ parser.addArgument(
 )
 
 const args = parser.parseArgs()
+const defaults = {
+  type: 'functional',
+  ext: 'jsx',
+  dir: __dirname
+}
 // console.dir(args);
 try {
   prepareOptions(args)
@@ -44,18 +56,20 @@ try {
 }
 
 function prepareOptions (args) {
-  let { name, ext, dir } = args
+  let { name, ext, dir, type } = args
 
   if (!name) throw Error(`a name must be provided`)
   information('Generating your component')
-  dir = dir || __dirname
-  ext = (ext && ext.charAt(0) === '.') ? ext.slice(1) : 'jsx'
+  dir = dir || defaults.dir
+  ext = (ext && ext.charAt(0) === '.') ? ext.slice(1) : defaults.ext
+  type = type || defaults.types
 
   if (!fs.existsSync(dir)) fs.mkdirSync(dir)
   const targetFile = path.join(dir, `${name}.${ext}`)
 
   const opts = {
-    name
+    name,
+    type
   }
 
   // TODO: do i want to first construct this obj, then call run?
