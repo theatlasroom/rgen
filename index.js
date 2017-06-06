@@ -41,6 +41,15 @@ parser.addArgument(
   }
 )
 
+parser.addArgument(
+  ['-w', '--with'],
+  {
+    help: 'additional files to be generated ie (stories|scss)',
+    defaultValue: '.jsx'
+  }
+)
+
+
 const args = parser.parseArgs()
 const defaults = {
   type: 'functional',
