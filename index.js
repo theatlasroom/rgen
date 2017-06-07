@@ -23,7 +23,7 @@ parser.addArgument(
 parser.addArgument(
   ['-t', '--type'],
   {
-    help: 'the type of component to create (functional|class)'
+    help: 'the type of component to create (stateless|stateful)'
   }
 )
 
@@ -39,7 +39,7 @@ parser.addArgument(
   ['-e', '--ext'],
   {
     help: 'file extension to use (defaults to jsx)',
-    defaultValue: '.jsx'
+    defaultValue: 'jsx'
   }
 )
 
@@ -54,7 +54,7 @@ parser.addArgument(
 
 const args = parser.parseArgs()
 const defaults = {
-  type: 'functional',
+  type: 'stateless',
   ext: 'jsx',
   dir: __dirname
 }
@@ -69,10 +69,13 @@ try {
 function prepareOptions (args) {
   let { name, ext, dir, type, with: withArgs } = args
 
+  console.log('args', args)
+
   if (!name) throw Error(`a name must be provided`)
   information('Generating your component')
   dir = dir || defaults.dir
-  ext = (ext && ext.charAt(0) === '.') ? ext.slice(1) : defaults.ext
+  ext = (ext && ext.charAt(0) === '.') ? ext.slice(1) : ext
+  ext = (ext) || defaults.ext
   type = type || defaults.types
 
   const opts = {
