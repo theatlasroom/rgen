@@ -2,8 +2,15 @@
 React component generator
 
 ## Installation
-`npm install -g rcli`
-`yarn add --global rcli`
+Using npm
+```
+npm install -g rcli
+```
+
+Using yarn
+```
+yarn global add rcli
+```
 
 ## Usage
 `rcli -n MyNewComponent -e jsx -w story -t stateless`
