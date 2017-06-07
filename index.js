@@ -46,9 +46,10 @@ parser.addArgument(
 parser.addArgument(
   ['-w', '--with'],
   {
-    help: 'additional files to be generated ie (stories|scss)',
+    help: 'additional files to be generated ie (story|scss)',
     action: 'append',
-    choices: ['stories', 'scss']
+    defaultValue: '',
+    choices: ['story', 'scss']
   }
 )
 
@@ -68,8 +69,6 @@ try {
 
 function prepareOptions (args) {
   let { name, ext, dir, type, with: withArgs } = args
-
-  console.log('args', args)
 
   if (!name) throw Error(`a name must be provided`)
   information('Generating your component')

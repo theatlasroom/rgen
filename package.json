@@ -9,10 +9,15 @@
     "test": "tape test.js | tap-dot ",
     "lint": "standard *.js --fix"
   },
+  "bin": {
+    "rcli" : "bin/rcli.js"
+  },
   "dependencies": {
     "argparse": "^1.0.9",
     "chalk": "^1.1.3",
-    "mkdirr": "^1.1.0",
+    "mkdirr": "^1.1.0"
+  },
+  "devDependencies": {
     "standard": "^10.0.2",
     "tape": "^4.6.3"
   }

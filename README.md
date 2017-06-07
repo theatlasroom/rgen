@@ -1,8 +1,12 @@
 # RCLI
 React component generator
 
+## Installation
+`npm install -g rcli`
+`yarn add --global rcli`
+
 ## Usage
-`node rcli -n MyNewComponent -e jsx -w stories -t stateless`
+`rcli -n MyNewComponent -e jsx -w story -t stateless`
 
 ## Options
 * `-n | --name <name-of-component>` - the name for the component / file to generate
@@ -13,7 +17,7 @@ React component generator
   - stateless - (default) [functional stateless component](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc)
   - stateful
 * `-w | --with <space-separated-options>` - generate additional files, currently supports
-  - stories - [Storybook for react](https://github.com/storybooks/storybook/tree/master/app/react) stories
+  - story - [Storybook for react](https://github.com/storybooks/storybook/tree/master/app/react) story
   - scss (soon)
 
 ## TODO
