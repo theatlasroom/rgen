@@ -4,6 +4,7 @@ const CLI = require('./lib/CLI')
 const pkg = require('./package.json')
 const chalk = require('chalk')
 const constants = require('./lib/utils').constants
+const mkdirr = require('mkdirr')
 
 const ArgumentParser = require('argparse').ArgumentParser
 const parser = new ArgumentParser({
@@ -75,9 +76,6 @@ function prepareOptions (args) {
   ext = (ext && ext.charAt(0) === '.') ? ext.slice(1) : defaults.ext
   type = type || defaults.types
 
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir)
-  // const targetFile = path.join(dir, `${name}.${ext}`)
-
   const opts = {
     name,
     type,
@@ -91,7 +89,7 @@ function prepareOptions (args) {
   cli.build((err, res) => {
     if (err) error('ERROR:', err)
     res.forEach((item) => {
-      const _file = targetFile(dir, name, item.type, ext)
+      const _file = targetFile(dir, name, item.file, item.type, ext)
       serializer(_file, item.data.join('\n'), (serializeErr) => {
         if (err) throw Error(serializeErr)
       })
@@ -99,14 +97,16 @@ function prepareOptions (args) {
   })
 }
 
-function targetFile(dir, name, type, ext = ''){
+function targetFile(dir, name, file, type, ext = ''){
   // urgggh gross
   const fileExt = {
     'TYPE_COMPONENT_JSX': constants.EXT_JSX,
     'TYPE_COMPONENT_JS': constants.EXT_JS,
-    'TYPE_STORY': constants.EXT_STORY
+    'TYPE_STORY': constants.EXT_JS
   }
-  return path.join(dir, `${name}.${fileExt[type]}`)
+  const _dir = path.join(dir, name)
+  if (!fs.existsSync(_dir)) mkdirr.build(_dir)
+  return path.join(_dir, `${file}.${fileExt[type]}`)
 }
 
 function serializer (file, data, cb) {
