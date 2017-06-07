@@ -3,6 +3,7 @@ const path = require('path')
 const CLI = require('./lib/CLI')
 const pkg = require('./package.json')
 const chalk = require('chalk')
+const constants = require('./lib/utils').constants
 
 const ArgumentParser = require('argparse').ArgumentParser
 const parser = new ArgumentParser({
@@ -45,7 +46,8 @@ parser.addArgument(
   ['-w', '--with'],
   {
     help: 'additional files to be generated ie (stories|scss)',
-    defaultValue: '.jsx'
+    action: 'append',
+    choices: ['stories', 'scss']
   }
 )
 
@@ -65,7 +67,7 @@ try {
 }
 
 function prepareOptions (args) {
-  let { name, ext, dir, type } = args
+  let { name, ext, dir, type, with: withArgs } = args
 
   if (!name) throw Error(`a name must be provided`)
   information('Generating your component')
@@ -74,22 +76,37 @@ function prepareOptions (args) {
   type = type || defaults.types
 
   if (!fs.existsSync(dir)) fs.mkdirSync(dir)
-  const targetFile = path.join(dir, `${name}.${ext}`)
+  // const targetFile = path.join(dir, `${name}.${ext}`)
 
   const opts = {
     name,
-    type
+    type,
+    withArgs,
+    ext
   }
 
   // TODO: do i want to first construct this obj, then call run?
   // or be able to just invoke run...
   const cli = new CLI(opts)
-  cli.build((err, data) => {
+  cli.build((err, res) => {
     if (err) error('ERROR:', err)
-    serializer(targetFile, data.join('\n'), (err) => {
-      if (err) throw Error(err)
+    res.forEach((item) => {
+      const _file = targetFile(dir, name, item.type, ext)
+      serializer(_file, item.data.join('\n'), (serializeErr) => {
+        if (err) throw Error(serializeErr)
+      })
     })
   })
+}
+
+function targetFile(dir, name, type, ext = ''){
+  // urgggh gross
+  const fileExt = {
+    'TYPE_COMPONENT_JSX': constants.EXT_JSX,
+    'TYPE_COMPONENT_JS': constants.EXT_JS,
+    'TYPE_STORY': constants.EXT_STORY
+  }
+  return path.join(dir, `${name}.${fileExt[type]}`)
 }
 
 function serializer (file, data, cb) {
