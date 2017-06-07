@@ -16,10 +16,11 @@ yarn global add rcli
 `rcli -n MyNewComponent -e jsx -w story -t stateless`
 
 ## Options
-* `-n | --name <name-of-component>` - the name for the component / file to generate
+* `-n | --name <name-of-component>` - the name for the component / file to generate, by default the component name will be a directory that an index.js(x) file gets written to.
 * `-e | --ext <file-extension-for-component>`
   - jsx - (default)
   - js
+* `-d | --dir` - output directory
 * `-t | --type <component-type>` - type of component to create
   - stateless - (default) [functional stateless component](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc)
   - stateful

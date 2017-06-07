@@ -10,7 +10,7 @@
     "lint": "standard *.js --fix"
   },
   "bin": {
-    "rcli" : "bin/rcli.js"
+    "rcli": "bin/rcli.js"
   },
   "dependencies": {
     "argparse": "^1.0.9",
