@@ -3,7 +3,6 @@
   "version": "0.2.0",
   "main": "index.js",
   "description": "React component generator",
-  "author": "Ezekiel Kigbo <theatlasroom@gmail.com>",
   "license": "MIT",
   "scripts": {
     "test": "tape test.js | tap-dot ",
@@ -20,5 +19,19 @@
   "devDependencies": {
     "standard": "^10.0.2",
     "tape": "^4.6.3"
+  },
+  "author": "Ezekiel <@theatlasroom>",
+  "keywords": [
+    "react",
+    "generator",
+    "cli",
+    "scaffold"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theatlasroom/rcli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/theatlasroom/rcli/issues"
   }
 }
