@@ -52,7 +52,6 @@ parser.addArgument(
   }
 )
 
-
 const args = parser.parseArgs()
 const defaults = {
   type: 'functional',
@@ -97,7 +96,7 @@ function prepareOptions (args) {
   })
 }
 
-function targetFile(dir, name, file, type, ext = ''){
+function targetFile (dir, name, file, type, ext = '') {
   // urgggh gross
   const fileExt = {
     'TYPE_COMPONENT_JSX': constants.EXT_JSX,
