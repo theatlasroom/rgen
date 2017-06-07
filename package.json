@@ -1,5 +1,5 @@
 {
-  "name": "rcli",
+  "name": "rgen",
   "version": "0.2.0",
   "main": "index.js",
   "description": "React component generator",
@@ -9,7 +9,7 @@
     "lint": "standard *.js --fix"
   },
   "bin": {
-    "rcli": "bin/rcli.js"
+    "rgen": "bin/rgen.js"
   },
   "dependencies": {
     "argparse": "^1.0.9",
@@ -29,9 +29,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/theatlasroom/rcli.git"
+    "url": "git+https://github.com/theatlasroom/rgen.git"
   },
   "bugs": {
-    "url": "https://github.com/theatlasroom/rcli/issues"
+    "url": "https://github.com/theatlasroom/rgen/issues"
   }
 }

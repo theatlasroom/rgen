@@ -1,19 +1,19 @@
-# RCLI
+# rgen
 React component generator
 
 ## Installation
 Using npm
 ```
-npm install -g rcli
+npm install -g rgen
 ```
 
 Using yarn
 ```
-yarn global add rcli
+yarn global add rgen
 ```
 
 ## Usage
-`rcli -n MyNewComponent -e jsx -w story -t stateless`
+`rgen -n MyNewComponent -e jsx -w story -t stateless`
 
 ## Options
 * `-n | --name <name-of-component>` - the name for the component / file to generate, by default the component name will be a directory that an index.js(x) file gets written to.
@@ -37,4 +37,4 @@ yarn global add rcli
 * [ ] Styled component
 * [ ] Jest / enzyme
 * [ ] Snapshots
-* [ ] Read .rcli file for configs (optional)
+* [ ] Read .rgen file for configs (optional)
